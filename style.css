@@ -1,0 +1,402 @@
+body {
+  background-color: #eef5ff;
+  user-select: none;
+  font-family: "poppins", sans-serif;
+}
+
+/* fonts */
+
+.poppins-thin {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* nav */
+
+.sajjad-nav {
+  display: flex;
+  margin: 10px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  border: 1px solid #888;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+}
+
+.brand img {
+  width: 30px;
+  height: 30px;
+  margin-right: 7px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 700;
+  color: #1f2937;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+}
+
+.accent {
+  color: #444;
+  margin-left: 5px;
+}
+
+.tagline {
+  font-weight: 500;
+  color: #6b7280;
+  letter-spacing: 0.3px;
+}
+
+@media (max-width: 768px) {
+  .sajjad-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .tagline {
+    font-size: 0.9rem;
+  }
+}
+
+.football-cards-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.switch-btns button {
+  border: 1px solid #cccccc;
+  background-color: #fff;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 0px 5px;
+  transition: all 0.5s ease;
+}
+
+.switch-btn.active {
+  background-color: rgb(0, 94, 246);
+  color: white;
+  border: none;
+}
+
+.matches-cards-live {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin: 20px;
+}
+
+.match-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+}
+
+.match-card img {
+  width: 50px;
+  height: 50px;
+}
+
+.home-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 300;
+  text-align: center;
+  width: 20%;
+  font-size: 14px;
+  gap: 10px;
+}
+
+.match-about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 60%;
+}
+
+.match-scores {
+  font-weight: 400;
+  font-size: 2rem;
+}
+
+.match-time {
+  border-radius: 8px;
+  border: 1px solid #989898;
+  color: #111;
+  padding: 2px 4px;
+  font-weight: 200;
+  font-size: 12px;
+}
+
+.match-status {
+  color: #111;
+  border: 1px solid #989898;
+  padding: 2px 4px;
+  border-radius: 8px;
+  font-weight: 300;
+  font-size: 12px;
+}
+
+.away-team {
+  display: flex;
+  width: 20%;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 300;
+  font-size: 14px;
+  gap: 10px;
+  text-align: center;
+}
+
+.matches-cards-today {
+  display: none;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin: 20px;
+}
+
+.leagues-table {
+  display: none;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.leagues-table img {
+  width: 20px;
+  height: 20px;
+}
+
+.table {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  margin: 20px;
+  min-width: 600px;
+  background-color: #fff;
+}
+
+.ranking .rank {
+  display: flex;
+  align-items: center;
+  padding: 6px 15px;
+  border-bottom: 1px solid #e5e5e5;
+  justify-content: space-between;
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid #e5e5e5;
+  justify-content: space-between;
+  font-weight: 200;
+  font-size: 13px;
+}
+
+.team-rank {
+  width: 20px;
+}
+
+.table-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.table-right span {
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.team-name {
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.table-right .points {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.table-right div {
+  width: 15px;
+}
+
+.score-titles {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.score-titles div {
+  width: 15px;
+}
+
+.table-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.error-loading-span {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 10px;
+}
+
+@media (max-width: 768px) {
+  .matches-cards-live {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .match-card img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .btn-title {
+    display: none;
+  }
+
+  .match-scores {
+    font-weight: 400;
+    font-size: 1.5rem;
+  }
+
+  .match-time {
+    font-weight: 200;
+    font-size: 8px;
+  }
+
+  .match-status{
+    font-weight: 200;
+    font-size: 8px;
+  }
+
+  .match-about{
+    gap: 10px;
+  }
+
+  .matches-cards-today{
+    grid-template-columns: repeat(1,1fr);
+  }
+
+}

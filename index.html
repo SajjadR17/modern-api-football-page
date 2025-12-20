@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Comment Page</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="sajjad-nav">
+      <div class="brand">
+        <img src="assets/favicon.png" alt="" />
+        <span class="logo">Sajjad</span><span class="accent">Dev</span>
+      </div>
+      <div class="tagline">Frontend Developer</div>
+    </nav>
+    <div class="football-cards-header">
+      <div class="switch-btns">
+        <button class="switch-btn live-btn active">Live</button>
+        <button class="switch-btn today-btn">Today</button>
+        <button class="switch-btn leagues-btn">Leagues Tables</button>
+      </div>
+      <span class="btn-title">Football Live Scores</span>
+    </div>
+    <div class="matches-cards-live">
+      <span class="error-loading-span">Loading...</span>
+    </div>
+    <div class="matches-cards-today">
+      <span class="error-loading-span">Loading...</span>
+    </div>
+    <div class="leagues-table">
+      <div class="table">
+        <div class="table-header">
+          <span class="season"
+            ><strong>Premier League </strong># 2025 - 26
+          </span>
+          <div class="score-titles">
+            <div><span>PL</span></div>
+            <div><span>W</span></div>
+            <div><span>D</span></div>
+            <div><span>L</span></div>
+            <div><span>GD</span></div>
+            <div><span>PTS</span></div>
+          </div>
+        </div>
+        <div class="ranking">
+          <div class="rank">
+            <div class="table-left">
+              <span class="team-rank">1</span>
+              <img class="team-img" src="assets/FC_Barcelona.png" alt="" />
+              <span class="team-name">Team Name</span>
+            </div>
+            <div class="table-right">
+              <span>20</span>
+              <span>13</span>
+              <span>5</span>
+              <span>2</span>
+              <span>18</span>
+              <span>14</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js" type="Module"></script>
+    <script src="data/mock-live.js" type="Module"></script>
+    <script src="data/mock-standings.js" type="Module"></script>
+    <script src="data/mock-today.js" type="Module"></script>
+  </body>
+</html>
