@@ -170,7 +170,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px;
+  margin: 15px;
   font-weight: 300;
   font-size: 14px;
 }
@@ -284,6 +284,32 @@ body {
   height: 20px;
 }
 
+select {
+  width: 150px;
+  height: 30px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  background-color: #fff;
+  appearance: none;
+  margin: 0px 20px;
+  cursor: pointer;
+  padding: 0px 10px;
+  font-size: 12px;
+}
+
+.redStandings {
+  color: red;
+}
+
+select:focus {
+  outline: none;
+}
+
+option {
+  background-color: #fff;
+  cursor: pointer;
+}
+
 .table {
   border: 1px solid #e5e5e5;
   border-radius: 8px;
@@ -386,17 +412,16 @@ body {
     font-size: 8px;
   }
 
-  .match-status{
+  .match-status {
     font-weight: 200;
     font-size: 8px;
   }
 
-  .match-about{
+  .match-about {
     gap: 10px;
   }
 
-  .matches-cards-today{
-    grid-template-columns: repeat(1,1fr);
+  .matches-cards-today {
+    grid-template-columns: repeat(1, 1fr);
   }
-
 }

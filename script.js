@@ -6,11 +6,22 @@ const todayBtn = document.querySelector(".today-btn");
 const liveBtn = document.querySelector(".live-btn");
 const leaguesBtn = document.querySelector(".leagues-btn");
 const btnTitle = document.querySelector(".btn-title");
-const leaguesTable = document.querySelector(".leagues-table")
+const leaguesTable = document.querySelector(".leagues-table");
+const selectTable = document.querySelector("#select-table");
+const leagueTableName = document.querySelector(".league-table-name");
 import { mockLiveMatches } from "./data/mock-live.js";
-import { mockStandings } from "./data/mock-standings.js";
+import {
+  mockPremierLeagueStandings,
+  mockSerieAStandings,
+  mockLaLigaStandings,
+  mockBundesligaStandings,
+  mockJapanStandings,
+  mockFranceStandings,
+} from "./data/mock-standings.js";
 import { mockTodayMatches } from "./data/mock-today.js";
 const USE_MOCK = true;
+const API_KEY = "";
+const BASE_URL = "https://v3.football.api-sports.io";
 
 liveBtn.addEventListener("click", () => {
   matchesCardsLive.style.display = "grid";
@@ -44,9 +55,6 @@ leaguesBtn.addEventListener("click", () => {
   leaguesBtn.classList.add("active");
   btnTitle.textContent = "Leagues Tabels - Standing";
 });
-
-const API_KEY = "";
-const BASE_URL = "https://v3.football.api-sports.io";
 
 async function fetchLiveMatches() {
   try {
@@ -92,7 +100,7 @@ function renderLiveMatches(matches) {
           <span class="home-team-name">${home.name}</span>
         </div>
         <div class="match-about">
-          <span class="match-time">${status.elapsed}</span>
+          <span class="match-time" style="color: green;border-color:green">${status.elapsed}</span>
           <span class="match-scores">${goals.home} - ${goals.away}</span>
           <span class="match-status">${status.short}</span>
         </div>
@@ -186,11 +194,9 @@ async function getTodayMatches() {
 
 function renderStandings(ranks) {
   ranking.innerHTML = "";
-  if (ranks.length === 0) {
-    ranking.innerHTML = `<span class="error-loading-span">No Tables Available</span>`;
-  }
 
   ranks.forEach((rank) => {
+    const teamRanks = ranks.length;
     const teamRank = rank.rank;
     const team = rank.team;
     const played = rank.played;
@@ -202,6 +208,9 @@ function renderStandings(ranks) {
 
     const teamRankDiv = document.createElement("div");
     teamRankDiv.classList.add("rank");
+    if (teamRank > teamRanks - 3) {
+      teamRankDiv.classList.add("redStandings");
+    }
 
     teamRankDiv.innerHTML = `
             <div class="table-left">
@@ -224,10 +233,33 @@ function renderStandings(ranks) {
 }
 
 async function getStandings() {
-  return mockStandings;
+  if (selectTable.value === "Premier League") {
+    leagueTableName.textContent = "Premier League ";
+    return mockPremierLeagueStandings;
+  }
+  if (selectTable.value === "Laliga") {
+    leagueTableName.textContent = "Laliga ";
+    return mockLaLigaStandings;
+  }
+  if (selectTable.value === "Bundesliga") {
+    leagueTableName.textContent = "Bundesliga ";
+    return mockBundesligaStandings;
+  }
+  if (selectTable.value === "Serie A") {
+    leagueTableName.textContent = "Serie A ";
+    return mockSerieAStandings;
+  }
+  if (selectTable.value === "Japan") {
+    leagueTableName.textContent = "Japan ";
+    return mockJapanStandings;
+  }
+  if (selectTable.value === "Ligue 1") {
+    leagueTableName.textContent = "Ligue 1 France ";
+    return mockFranceStandings;
+  }
 }
 
-leaguesBtn.addEventListener("click", async () => {
+selectTable.addEventListener("change", async () => {
   const ranks = await getStandings();
   renderStandings(ranks);
 });

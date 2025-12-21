@@ -35,10 +35,19 @@
       <span class="error-loading-span">Loading...</span>
     </div>
     <div class="leagues-table">
+      <select name="table-select" id="select-table">
+        <option value="Premier League" selected>Premier League</option>
+        <option value="Laliga">Laliga</option>
+        <option value="Bundesliga">Bundesliga</option>
+        <option value="Serie A">Serie A</option>
+        <option value="Japan">Japan</option>
+        <option value="Ligue 1">Ligue 1 France</option>
+      </select>
       <div class="table">
         <div class="table-header">
           <span class="season"
-            ><strong>Premier League </strong># 2025 - 26
+            ><strong class="league-table-name">Premier League </strong># 2025 -
+            26
           </span>
           <div class="score-titles">
             <div><span>PL</span></div>
@@ -49,23 +58,7 @@
             <div><span>PTS</span></div>
           </div>
         </div>
-        <div class="ranking">
-          <div class="rank">
-            <div class="table-left">
-              <span class="team-rank">1</span>
-              <img class="team-img" src="assets/FC_Barcelona.png" alt="" />
-              <span class="team-name">Team Name</span>
-            </div>
-            <div class="table-right">
-              <span>20</span>
-              <span>13</span>
-              <span>5</span>
-              <span>2</span>
-              <span>18</span>
-              <span>14</span>
-            </div>
-          </div>
-        </div>
+        <div class="ranking"></div>
       </div>
     </div>
     <script src="script.js" type="Module"></script>
