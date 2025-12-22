@@ -12,7 +12,9 @@
 
 <p align="center">
   <img src="preview1.png" alt="Football Live Matches UI" width="600"/>
-  <img src="preview2.png" alt="League Table UI" width="600"/>
+  <img src="preview2.png" alt="Modal" width="600"/>
+  <img src="preview3.png" alt="Modal" width="600"/>
+  <img src="preview4.png" alt="League Table UI" width="600"/>
 </p>
 
 ---
@@ -22,6 +24,7 @@
 This project is a modern football live score interface designed to practice and showcase front-end development skills.
 
 It includes:
+
 - Live matches view
 - Today matches
 - League tables with a responsive layout
@@ -32,12 +35,12 @@ The main focus of this project is clean UI, mobile-first design, and real-world 
 
 ## ⚙️ Tech Stack
 
-| Technology | Purpose |
-|-----------|--------|
-| HTML5 | Page structure |
-| CSS3 (Flexbox & Media Queries) | Layout & responsiveness |
-| JavaScript | Data handling & UI logic |
-| Mock / API-ready Data | Matches & league tables |
+| Technology                     | Purpose                  |
+| ------------------------------ | ------------------------ |
+| HTML5                          | Page structure           |
+| CSS3 (Flexbox & Media Queries) | Layout & responsiveness  |
+| JavaScript                     | Data handling & UI logic |
+| Mock / API-ready Data          | Matches & league tables  |
 
 ---
 
@@ -47,7 +50,7 @@ The main focus of this project is clean UI, mobile-first design, and real-world 
 ✅ Mobile-friendly league tables with touch horizontal scroll  
 ✅ Clean and modern UI  
 ✅ Tab-based navigation (Live / Today / Tables)  
-✅ API-ready structure (currently using mock data)  
+✅ API-ready structure (currently using mock data)
 
 ---
 
@@ -64,6 +67,7 @@ Deployed using GitHub Pages ⚡️
 git clone https://github.com/SajjadR17/modern-api-football-page.git
 cd modern-api-football-page
 open index.html
+
 ---
 
 ## 🧾 License
