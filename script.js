@@ -13,6 +13,7 @@ const overlay = document.querySelector(".overlay");
 const body = document.body;
 const modalBox = document.querySelector(".modal-box");
 import { mockLiveMatches } from "./data/mock-live.js";
+const liveMatches = mockLiveMatches;
 import {
   mockPremierLeagueStandings,
   mockSerieAStandings,
@@ -25,6 +26,14 @@ import { mockTodayMatches } from "./data/mock-today.js";
 const USE_MOCK = true;
 const API_KEY = "";
 const BASE_URL = "https://v3.football.api-sports.io";
+
+setInterval(() => {
+  if (!navigator.onLine) {
+    matchesCardsLive.innerHTML = `<span class="error-loading-span">You Are Offline , Check Your Network</span>`;
+    matchesCardsToday.innerHTML = `<span class="error-loading-span">You Are Offline , Check Your Network</span>`;
+    leaguesTable.innerHTML = `<span class="error-loading-span-league">You Are Offline , Check Your Network</span>`;
+  }
+});
 
 liveBtn.addEventListener("click", () => {
   matchesCardsLive.style.display = "grid";
@@ -72,7 +81,7 @@ async function fetchLiveMatches() {
     );
 
     if (!res.ok) {
-      matchesCardsToday.innerHTML = `<span class="error-loading-span">Network Error</span>`;
+      matchesCardsLive.innerHTML = `<span class="error-loading-span">Network Error !!</span>`;
     }
     const data = await res.json();
     return data.response;
@@ -104,9 +113,9 @@ function renderLiveMatches(matches) {
           <span class="home-team-name">${home.name}</span>
         </div>
         <div class="match-about">
-          <span class="match-time" style="color: green;border-color:green">${status.elapsed}</span>
+          <span class="match-time live-match-time" >${status.elapsed}</span>
           <span class="match-scores">${goals.home} - ${goals.away}</span>
-          <span class="match-status" style="color: red;border-color:red">${status.short}</span>
+          <div class="live-bedge"><span class="live-status">${status.short}</span></div>
         </div>
         <div class="away-team">
           <img src="${away.logo}" alt="" />
@@ -125,7 +134,7 @@ async function fetchTodayMatches() {
       headers: { "x-apisports-key": API_KEY },
     });
     if (!res.ok) {
-      matchesCardsToday.innerHTML = `<span class="error-loading-span">Network Error</span>`;
+      matchesCardsToday.innerHTML = `<span class="error-loading-span">Network Error !!</span>`;
     }
     const data = await res.json();
     return data.response;
@@ -577,9 +586,9 @@ matchesCardsLive.addEventListener("click", (e) => {
           <span>${match.teams.home.name}</span>
         </div>
         <div class="modal-match-card-status">
-          <span class="modal-match-time">'${match.fixture.status.elapsed}</span>
+          <span class="live-match-time">'${match.fixture.status.elapsed}</span>
           <span class="vs-span">VS</span>
-          <span class="modal-match-status">${match.fixture.status.short}</span>
+          <span class="live-bedge">${match.fixture.status.short}</span>
         </div>
         <div class="modal-team modal-away-team">
           <img

@@ -35,7 +35,7 @@ export const mockTodayMatches = [
         home: [{ minute: 12, player: "João Pedro" }],
         away: [
           { minute: 38, player: "Haaland" },
-          { minute: 55, player: "De Bruyne" },
+          { minute: 55, player: "Diaz" },
         ],
       },
       cards: {
@@ -128,7 +128,7 @@ export const mockTodayMatches = [
           { minute: 15, player: "Lautaro Martínez" },
           { minute: 78, player: "Çalhanoğlu" },
         ],
-        away: [{ minute: 41, player: "Leão" }],
+        away: [{ minute: 41, player: "Pedro" }],
       },
       cards: { home: [], away: [] },
       subs: { home: [], away: [] },

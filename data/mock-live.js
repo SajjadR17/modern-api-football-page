@@ -36,14 +36,14 @@ export const mockLiveMatches = [
           { minute: 14, player: "Salah" },
           { minute: 58, player: "Núñez" },
         ],
-        away: [{ minute: 33, player: "Rashford" }],
+        away: [{ minute: 33, player: "Diallo" }],
       },
       cards: {
         home: [],
         away: [{ minute: 70, player: "Casemiro", detail: "Yellow Card" }],
       },
       subs: {
-        home: [{player_in:"Núñez",player_out:"Jota",minute: 35}],
+        home: [{player_in:"Isak",player_out:"Núñez",minute: 35}],
         away: [],
       },
     },
@@ -56,7 +56,7 @@ export const mockLiveMatches = [
     fixture: {
       id: 402,
       date: "22:00",
-      status: { short: "LIVE", elapsed: 52 },
+      status: { short: "LIVE", elapsed: 67},
       lead: "Draw"
     },
 
@@ -134,7 +134,7 @@ export const mockLiveMatches = [
     events: {
       goals: {
         home: [],
-        away: [{ minute: 49, player: "Dybala" }],
+        away: [{ minute: 49, player: "Modric" }],
       },
       cards: {
         home: [{ minute: 57, player: "Locatelli", detail: "Yellow Card" }],

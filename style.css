@@ -202,6 +202,7 @@ body {
 .match-card {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: #fff;
   padding: 20px;
   border: 1px solid #e5e5e5;
@@ -526,7 +527,6 @@ body {
 
 .match-card img {
   width: 50px;
-  height: 50px;
 }
 
 .home-team {
@@ -563,10 +563,14 @@ body {
 }
 
 .match-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #666;
+  gap: 6px;
   color: #111;
-  border: 1px solid #989898;
-  padding: 2px 4px;
   border-radius: 8px;
+  padding: 2px 4px;
   font-weight: 300;
   font-size: 12px;
 }
@@ -677,6 +681,54 @@ option {
   font-size: 14px;
 }
 
+.live-match-time {
+  border: 1px solid green;
+  border-radius: 8px;
+  padding: 2px 4px;
+  font-weight: 300;
+  font-size: 12px;
+  color: green;
+  animation: liveMatchTimeColor 1s ease-in-out infinite;
+}
+
+@keyframes liveMatchTimeColor {
+  0% {
+    box-shadow: 0 0 0 rgba(46, 204, 113, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 3px green;
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(46, 204, 113, 0.7);
+  }
+}
+
+.live-bedge{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid red;
+  gap: 6px;
+  color: red;
+  border-radius: 8px;
+  font-weight: 300;
+  font-size: 12px;
+  padding: 2px 4px;
+  animation: liveMatchBedgeColor 1s ease-in-out infinite;
+}
+
+@keyframes liveMatchBedgeColor {
+  0% {
+    box-shadow: 0 0 0 rgb(255, 70, 70);
+  }
+  50% {
+    box-shadow: 0 0 3px red;
+  }
+  100% {
+    box-shadow: 0 0 0 rgb(255, 70, 70);
+  }
+}
+
 .table-right .points {
   font-weight: 600;
   font-size: 16px;
@@ -705,7 +757,13 @@ option {
 .error-loading-span {
   font-size: 18px;
   font-weight: 700;
-  margin: 10px;
+  margin: 10px 0px;
+}
+
+.error-loading-span-league {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 20px;
 }
 
 @media (max-width: 768px) {
