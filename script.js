@@ -497,19 +497,19 @@ function renderStandings(ranks) {
 
 async function getStandings() {
   if (selectTable.value === "Premier League") {
-    leagueTableName.textContent = "Premier League ";
+    leagueTableName.innerHTML = `<img src="assets/premier-league-icon.jpg" alt=""><span>Premier League </span>`;
     return mockPremierLeagueStandings;
   }
   if (selectTable.value === "Laliga") {
-    leagueTableName.textContent = "Laliga ";
+    leagueTableName.innerHTML = `<img src="assets/laliga-icon.jpg" alt=""><span>Laliga </span>`;
     return mockLaLigaStandings;
   }
   if (selectTable.value === "Bundesliga") {
-    leagueTableName.textContent = "Bundesliga ";
+    leagueTableName.innerHTML = `<img src="assets/bundesliga-icon.jpg" alt=""><span>Bundesliga </span>`;
     return mockBundesligaStandings;
   }
   if (selectTable.value === "Serie A") {
-    leagueTableName.textContent = "Serie A ";
+    leagueTableName.innerHTML = `<img src="assets/serie-a-icon.jpg" alt=""><span>Serie A </span>`;
     return mockSerieAStandings;
   }
   if (selectTable.value === "Japan") {
@@ -517,7 +517,7 @@ async function getStandings() {
     return mockJapanStandings;
   }
   if (selectTable.value === "Ligue 1") {
-    leagueTableName.textContent = "Ligue 1 France ";
+    leagueTableName.innerHTML = `<img src="assets/ligue-1-icon.jpg" alt=""><span>Ligue 1 </span>`;
     return mockFranceStandings;
   }
 }

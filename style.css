@@ -593,6 +593,22 @@ body {
   margin: 20px;
 }
 
+.season{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.league-table-name{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.league-table-name img{
+  width: 20px;
+}
+
 .leagues-table {
   display: none;
   width: 100%;
@@ -600,7 +616,7 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-.leagues-table img {
+.table-left img {
   width: 20px;
   height: 20px;
 }
