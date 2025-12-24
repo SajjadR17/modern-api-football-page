@@ -26,7 +26,8 @@
       <div class="switch-btns">
         <button class="switch-btn live-btn active">Live</button>
         <button class="switch-btn today-btn">Today</button>
-        <button class="switch-btn leagues-btn">Leagues Tables</button>
+        <button class="switch-btn leagues-btn">Standings</button>
+        <button class="switch-btn Transfers-btn">Transfers</button>
       </div>
       <span class="btn-title">Football Live Scores</span>
     </div>
@@ -47,8 +48,8 @@
       </select>
       <div class="table">
         <div class="table-header">
-          <div class="season"
-            ><div class="league-table-name">Premier League</div>
+          <div class="season">
+            <div class="league-table-name">Premier League</div>
             # 2025 - 26
           </div>
           <div class="score-titles">
@@ -63,9 +64,56 @@
         <div class="ranking"></div>
       </div>
     </div>
+    <div class="player-transfers">
+      <div class="transfer-controls">
+        <input
+          type="text"
+          class="transfer-player-search"
+          placeholder="Enter player name"
+        />
+        <select name="sort-transfer-player" id="sort-transfer-player">
+          <option value="newest" selected>Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="highest">Highest Fee</option>
+          <option value="lowest">Lowest Fee</option>
+        </select>
+      </div>
+      <div class="transfer-players-cards"></div>
+    </div>
+    <div class="transfer-cards-modal">
+      <div class="transfer-cards-modal-header">
+        <span>Player About</span>
+        <img
+          class="close-modal"
+          src="https://img.icons8.com/?size=100&id=8112&format=png&color=000000"
+          alt=""
+        />
+      </div>
+      <div class="transfer-cards-modal-top">
+        <img class="transfer-modal-player-img" src="players/kdb.jpg" alt="" />
+        <div class="transfer-cards-modal-about">
+          <div class="transfer-modal-player-name">De Bruyne</div>
+          <div class="transfer-modal-player-nat">
+            <img src="https://media.api-sports.io/flags/be.svg" alt="" />
+            <span>Belgium</span>
+          </div>
+          <span class="transfer-modal-player-position">Pos : Attaking Mid</span>
+          <span class="transfer-modal-player-age">Age : 34</span>
+        </div>
+      </div>
+      <div class="transfer-about">
+        <span
+          >He moved from <b>Man City</b> to <b>Napoli</b> on
+          <b>2025-07-01</b>
+        </span>
+        <span>Contract until : <b>2027-06-30</b></span>
+        <span>For a fee of <b>60M EUR</b></span>
+      </div>
+    </div>
     <script src="script.js" type="Module"></script>
     <script src="data/mock-live.js" type="Module"></script>
     <script src="data/mock-standings.js" type="Module"></script>
     <script src="data/mock-today.js" type="Module"></script>
+    <script src="data/mock-transfers.js" type="Module"></script>
   </body>
 </html>

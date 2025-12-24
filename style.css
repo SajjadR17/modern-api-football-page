@@ -174,6 +174,8 @@ body {
   margin: 15px;
   font-weight: 300;
   font-size: 14px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #444;
 }
 
 .switch-btns button {
@@ -236,6 +238,23 @@ body {
   transition: all 0.5s ease;
   opacity: 0;
   width: 80%;
+}
+
+.transfer-cards-modal {
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 600px;
+  z-index: -4;
+  border: 1px solid #a6a6a6;
+  border-radius: 8px;
+  background-color: #fff;
+  position: fixed;
+  -webkit-overflow-scrolling: touch;
+  transition: all 0.5s ease;
+  opacity: 0;
+  width: 400px;
 }
 
 .venue-name img {
@@ -593,19 +612,19 @@ body {
   margin: 20px;
 }
 
-.season{
+.season {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-.league-table-name{
+.league-table-name {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-.league-table-name img{
+.league-table-name img {
   width: 20px;
 }
 
@@ -625,6 +644,7 @@ select {
   width: 150px;
   height: 30px;
   border: 1px solid #cccccc;
+  color: #636363;
   border-radius: 8px;
   background-color: #fff;
   appearance: none;
@@ -719,7 +739,7 @@ option {
   }
 }
 
-.live-bedge{
+.live-bedge {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -728,7 +748,7 @@ option {
   color: red;
   border-radius: 8px;
   font-weight: 300;
-  font-size: 12px;
+  font-size: 10px;
   padding: 2px 4px;
   animation: liveMatchBedgeColor 1s ease-in-out infinite;
 }
@@ -782,10 +802,177 @@ option {
   margin: 20px;
 }
 
+.transfer-players-cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin: 20px;
+}
+
+.player-transfer-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #b8b8b8;
+  border-radius: 8px;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.player-transfer-card-img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.from-team {
+  width: 20px;
+  height: 20px;
+}
+
+.to-team {
+  width: 20px;
+  height: 20px;
+}
+
+.player-transfer-card-name {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.nationality-flag {
+  width: 15px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.player-transfer-card-time {
+  font-weight: 300;
+  font-size: 10px;
+}
+
+.transfer-teams {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 10px 0px;
+}
+
+.player-transfer-card-detail-span {
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.teams-arrow {
+  width: 15px;
+  height: 10px;
+  opacity: 0.7;
+}
+
+.transfer-controls {
+  margin: 0px 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.transfer-player-search {
+  height: 30px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  padding: 0px 10px;
+}
+
+.transfer-player-search:focus {
+  outline: none;
+}
+
+.transfer-cards-modal-top {
+  display: flex;
+  padding: 10px;
+  gap: 20px;
+  border-bottom: 1px solid #adadad;
+}
+
+.transfer-modal-player-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
+}
+
+.transfer-cards-modal-about {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.transfer-modal-player-nat img {
+  width: 15px;
+  vertical-align: middle;
+}
+
+.transfer-modal-player-name {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.transfer-modal-player-nat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 300;
+  font-size: 12px;
+}
+
+.transfer-modal-player-position {
+  font-weight: 300;
+  font-size: 12px;
+}
+
+.transfer-modal-player-age {
+  font-weight: 300;
+  font-size: 12px;
+}
+
+.transfer-about {
+  display: flex;
+  flex-direction: column;
+  font-weight: 300;
+  font-size: 14px;
+  padding: 10px;
+  gap: 5px;
+  border-bottom: 1px solid #adadad;
+}
+
+.transfer-cards-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 300;
+  padding: 5px 10px;
+  border-bottom: 1px solid #adadad;
+  font-size: 12px;
+}
+
+.transfer-cards-modal-header img {
+  width: 20px;
+  cursor: pointer;
+}
+
+@media (max-width: 1020px) {
+  .transfer-players-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .matches-cards-live {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .transfer-players-cards {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .match-card img {
@@ -821,7 +1008,21 @@ option {
   }
 }
 
+@media (max-width: 550px) {
+  .transfer-players-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 480px) {
+  .transfer-players-cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .switch-btns button {
+    margin: 10px 5px;
+  }
+
   .modal-box {
     width: 90%;
   }

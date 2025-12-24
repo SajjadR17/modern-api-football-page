@@ -1,18 +1,29 @@
-const matchesCardsLive = document.querySelector(".matches-cards-live");
-const matchesCardsToday = document.querySelector(".matches-cards-today");
-const ranking = document.querySelector(".ranking");
+const matchesCardsLiveDiv = document.querySelector(".matches-cards-live");
+const matchesCardsTodayDiv = document.querySelector(".matches-cards-today");
+const rankingDiv = document.querySelector(".ranking");
 const switchBtns = document.querySelectorAll(".switch-btn");
 const todayBtn = document.querySelector(".today-btn");
 const liveBtn = document.querySelector(".live-btn");
 const leaguesBtn = document.querySelector(".leagues-btn");
 const btnTitle = document.querySelector(".btn-title");
-const leaguesTable = document.querySelector(".leagues-table");
+const leaguesTableDiv = document.querySelector(".leagues-table");
 const selectTable = document.querySelector("#select-table");
 const leagueTableName = document.querySelector(".league-table-name");
 const overlay = document.querySelector(".overlay");
 const body = document.body;
+const transferCardsModal = document.querySelector(".transfer-cards-modal");
+const sortTransferPlayer = document.querySelector("#sort-transfer-player");
 const modalBox = document.querySelector(".modal-box");
+const playerTransfersDiv = document.querySelector(".player-transfers");
+const TransfersBtn = document.querySelector(".Transfers-btn");
+const transferPlayerSearchInput = document.querySelector(
+  ".transfer-player-search"
+);
+const transferPlayersCardsDiv = document.querySelector(
+  ".transfer-players-cards"
+);
 import { mockLiveMatches } from "./data/mock-live.js";
+import { mockTransfers } from "./data/mock-transfers.js";
 const liveMatches = mockLiveMatches;
 import {
   mockPremierLeagueStandings,
@@ -29,16 +40,30 @@ const BASE_URL = "https://v3.football.api-sports.io";
 
 setInterval(() => {
   if (!navigator.onLine) {
-    matchesCardsLive.innerHTML = `<span class="error-loading-span">You Are Offline , Check Your Network</span>`;
-    matchesCardsToday.innerHTML = `<span class="error-loading-span">You Are Offline , Check Your Network</span>`;
-    leaguesTable.innerHTML = `<span class="error-loading-span-league">You Are Offline , Check Your Network</span>`;
+    matchesCardsLiveDiv.innerHTML = `<span class="error-loading-span">You Are Offline , Check Your Network</span>`;
+    matchesCardsTodayDiv.innerHTML = `<span class="error-loading-span">You Are Offline , Check Your Network</span>`;
+    leaguesTableDiv.innerHTML = `<span class="error-loading-span-league">You Are Offline , Check Your Network</span>`;
+    playerTransfersDiv.innerHTML = `<span class="error-loading-span-league">You Are Offline , Check Your Network</span>`;
   }
 });
 
 liveBtn.addEventListener("click", () => {
-  matchesCardsLive.style.display = "grid";
-  matchesCardsToday.style.display = "none";
-  leaguesTable.style.display = "none";
+  matchesCardsLiveDiv.style.display = "grid";
+  matchesCardsTodayDiv.style.display = "none";
+  leaguesTableDiv.style.display = "none";
+  playerTransfersDiv.style.display = "none";
+  switchBtns.forEach((switchBtn) => {
+    switchBtn.classList.remove("active");
+  });
+  liveBtn.classList.add("active");
+  btnTitle.textContent = "Football Live Scores";
+});
+
+window.addEventListener("load", () => {
+  matchesCardsLiveDiv.style.display = "grid";
+  matchesCardsTodayDiv.style.display = "none";
+  leaguesTableDiv.style.display = "none";
+  playerTransfersDiv.style.display = "none";
   switchBtns.forEach((switchBtn) => {
     switchBtn.classList.remove("active");
   });
@@ -47,9 +72,10 @@ liveBtn.addEventListener("click", () => {
 });
 
 todayBtn.addEventListener("click", () => {
-  matchesCardsLive.style.display = "none";
-  matchesCardsToday.style.display = "grid";
-  leaguesTable.style.display = "none";
+  matchesCardsLiveDiv.style.display = "none";
+  matchesCardsTodayDiv.style.display = "grid";
+  leaguesTableDiv.style.display = "none";
+  playerTransfersDiv.style.display = "none";
   switchBtns.forEach((switchBtn) => {
     switchBtn.classList.remove("active");
   });
@@ -57,10 +83,23 @@ todayBtn.addEventListener("click", () => {
   btnTitle.textContent = "Today Football Matches";
 });
 
+TransfersBtn.addEventListener("click", () => {
+  matchesCardsLiveDiv.style.display = "none";
+  matchesCardsTodayDiv.style.display = "none";
+  leaguesTableDiv.style.display = "none";
+  playerTransfersDiv.style.display = "block";
+  switchBtns.forEach((switchBtn) => {
+    switchBtn.classList.remove("active");
+  });
+  TransfersBtn.classList.add("active");
+  btnTitle.textContent = "Transfers";
+});
+
 leaguesBtn.addEventListener("click", () => {
-  matchesCardsLive.style.display = "none";
-  matchesCardsToday.style.display = "none";
-  leaguesTable.style.display = "block";
+  matchesCardsLiveDiv.style.display = "none";
+  matchesCardsTodayDiv.style.display = "none";
+  leaguesTableDiv.style.display = "block";
+  playerTransfersDiv.style.display = "none";
   switchBtns.forEach((switchBtn) => {
     switchBtn.classList.remove("active");
   });
@@ -81,7 +120,7 @@ async function fetchLiveMatches() {
     );
 
     if (!res.ok) {
-      matchesCardsLive.innerHTML = `<span class="error-loading-span">Network Error !!</span>`;
+      matchesCardsLiveDiv.innerHTML = `<span class="error-loading-span">Network Error !!</span>`;
     }
     const data = await res.json();
     return data.response;
@@ -92,9 +131,9 @@ async function fetchLiveMatches() {
 }
 
 function renderLiveMatches(matches) {
-  matchesCardsLive.innerHTML = "";
+  matchesCardsLiveDiv.innerHTML = "";
   if (matches.length === 0) {
-    matchesCardsLive.innerHTML = `<span class="error-loading-span">No Live Matches Available</span>`;
+    matchesCardsLiveDiv.innerHTML = `<span class="error-loading-span">No Live Matches Available</span>`;
   }
 
   matches.forEach((match) => {
@@ -123,7 +162,7 @@ function renderLiveMatches(matches) {
         </div>
     `;
 
-    matchesCardsLive.appendChild(card);
+    matchesCardsLiveDiv.appendChild(card);
   });
 }
 
@@ -134,7 +173,7 @@ async function fetchTodayMatches() {
       headers: { "x-apisports-key": API_KEY },
     });
     if (!res.ok) {
-      matchesCardsToday.innerHTML = `<span class="error-loading-span">Network Error !!</span>`;
+      matchesCardsTodayDiv.innerHTML = `<span class="error-loading-span">Network Error !!</span>`;
     }
     const data = await res.json();
     return data.response;
@@ -144,9 +183,9 @@ async function fetchTodayMatches() {
 }
 
 function renderTodayMatches(matches) {
-  matchesCardsToday.innerHTML = "";
+  matchesCardsTodayDiv.innerHTML = "";
   if (matches.length === 0) {
-    matchesCardsToday.innerHTML = `<span class="error-loading-span">No Matches Available Today</span>`;
+    matchesCardsTodayDiv.innerHTML = `<span class="error-loading-span">No Matches Available Today</span>`;
   }
 
   matches.forEach((match) => {
@@ -196,11 +235,11 @@ function renderTodayMatches(matches) {
     `;
     }
 
-    matchesCardsToday.appendChild(card);
+    matchesCardsTodayDiv.appendChild(card);
   });
 }
 
-matchesCardsToday.addEventListener("click", (e) => {
+matchesCardsTodayDiv.addEventListener("click", (e) => {
   const card = e.target.closest(".match-card");
   if (!card) return;
   const matchId = Number(card.dataset.id);
@@ -425,9 +464,7 @@ matchesCardsToday.addEventListener("click", (e) => {
   });
 
   const closeModal = document.querySelector(".close-modal");
-  body.addEventListener("keydown", (e) => {
-    console.log(e.key);
-  });
+
   closeModal.addEventListener("click", () => {
     overlay.style.display = "none";
     modalBox.classList.remove("modal-box-open");
@@ -454,7 +491,7 @@ matchesCardsToday.addEventListener("click", (e) => {
 });
 
 function renderStandings(ranks) {
-  ranking.innerHTML = "";
+  rankingDiv.innerHTML = "";
 
   ranks.forEach((rank) => {
     const teamRanks = ranks.length;
@@ -472,9 +509,6 @@ function renderStandings(ranks) {
     if (teamRank > teamRanks - 3) {
       teamRankDiv.classList.add("redStandings");
     }
-    if (teamRank <= 4) {
-      teamRankDiv.classList.add("GreenStandings");
-    }
     teamRankDiv.innerHTML = `
             <div class="table-left">
               <span class="team-rank">${teamRank}</span>
@@ -491,7 +525,7 @@ function renderStandings(ranks) {
             </div>
     `;
 
-    ranking.appendChild(teamRankDiv);
+    rankingDiv.appendChild(teamRankDiv);
   });
 }
 
@@ -560,7 +594,7 @@ liveBtn.addEventListener("click", async () => {
   renderLiveMatches(matches);
 });
 
-matchesCardsLive.addEventListener("click", (e) => {
+matchesCardsLiveDiv.addEventListener("click", (e) => {
   const card = e.target.closest(".match-card");
   if (!card) return;
   const matchId = Number(card.dataset.id);
@@ -803,3 +837,134 @@ matchesCardsLive.addEventListener("click", (e) => {
   modalMatchTime.style.border = "1px solid green";
   modalMatchTime.style.color = "green";
 });
+
+async function getTransfers() {
+  return mockTransfers;
+}
+
+function renderTransfers(transfers) {
+  transferPlayersCardsDiv.innerHTML = "";
+
+  transfers.forEach((transfer) => {
+    let transferPlayersCardDiv = document.createElement("div");
+    transferPlayersCardDiv.classList.add("player-transfer-card");
+    transferPlayersCardDiv.dataset.id = transfer.id;
+    transferPlayersCardDiv.innerHTML = `
+          <img src="${
+            transfer.assets.playerImageLocal
+          }" alt="" class="player-transfer-card-img" />
+          <div>
+            <img src="${
+              transfer.player.flag
+            }" alt="" class="nationality-flag" />
+            <span class="player-transfer-card-name">${
+              transfer.player.name
+            }</span>
+          </div>
+          <span class="player-transfer-card-time">${transfer.move.transferDate.slice(
+            0,
+            4
+          )} to ${transfer.move.contractUntil.slice(0, 4)}</span>
+          <div class="transfer-teams">
+            <img
+              src="${transfer.assets.fromTeamLogo}"
+              alt=""
+              class="from-team"
+            />
+            <img class="teams-arrow" src="https://img.icons8.com/?size=100&id=86086&format=png&color=000000" alt="">
+            <img
+              src="${transfer.assets.toTeamLogo}"
+              alt=""
+              class="to-team"
+            />
+          </div>
+          <span class="player-transfer-card-detail-span">Tap For More Details</span>
+    `;
+
+    transferPlayersCardsDiv.appendChild(transferPlayersCardDiv);
+  });
+}
+
+TransfersBtn.addEventListener("click", async () => {
+  const transfers = await getTransfers();
+  renderTransfers(transfers);
+});
+
+window.addEventListener("load", async () => {
+  const transfers = await getTransfers();
+  renderTransfers(transfers);
+});
+
+let allTransfers = [];
+async function fetchTransfers() {
+  allTransfers = await getTransfers();
+}
+
+fetchTransfers();
+
+function sortAndSearch(allTransfers, searchValue, selectValue) {
+  let result = [...allTransfers];
+  console.log(result);
+
+  result = result.filter((transfer) => {
+    return transfer.player.name
+      .toLocaleLowerCase()
+      .includes(searchValue.toLowerCase());
+  });
+
+  if (selectValue === "newest") {
+    result.sort((a, b) => {
+      return (
+        Number(b.move.transferDate.slice(0, 4)) -
+        Number(a.move.transferDate.slice(0, 4))
+      );
+    });
+  }
+  if (selectValue === "oldest") {
+    result.sort((a, b) => {
+      return (
+        Number(a.move.transferDate.slice(0, 4)) -
+        Number(b.move.transferDate.slice(0, 4))
+      );
+    });
+  }
+  if (selectValue === "highest") {
+    result.sort((a, b) => {
+      return b.move.fee - a.move.fee;
+    });
+  }
+  if (selectValue === "lowest") {
+    result.sort((a, b) => {
+      return a.move.fee - b.move.fee;
+    });
+  }
+  return result;
+}
+
+function updateUI() {
+  const selectValue = sortTransferPlayer.value;
+  const searchValue = transferPlayerSearchInput.value;
+  const filteredTransfers = sortAndSearch(
+    allTransfers,
+    searchValue,
+    selectValue
+  );
+
+  renderTransfers(filteredTransfers);
+  if (filteredTransfers.length === 0) {
+    transferPlayersCardsDiv.innerHTML = `<span class="error-loading-span">Player not found !!</span>`;
+  }
+}
+
+transferPlayerSearchInput.addEventListener("input", updateUI);
+sortTransferPlayer.addEventListener("change", updateUI);
+
+// transferPlayersCardsDiv.addEventListener("click", (e) => {
+//   const transferPlayersCardDiv = e.target.closest(".player-transfer-card");
+//   const transferCardId = Number(transferPlayersCardDiv.dataset.id);
+//   const transferCard = mockTransfers.find((t) => t.id === transferCardId);
+//   overlay.style.display = "block";
+//   transferCardsModal.style.display = "block";
+//   transferCardsModal.classList.add("modal-box-open");
+//   body.classList.add("no-scroll");
+// });
