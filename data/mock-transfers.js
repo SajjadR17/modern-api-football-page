@@ -39,7 +39,7 @@ export const mockTransfers = [
     },
     move: {
       fromTeam: "Manchester United",
-      toTeam: "Al Nassr",
+      toTeam: "Al-Nassr",
       transferDate: "2023-01-01",
       contractUntil: "2027-06-30",
       fee: 0,

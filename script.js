@@ -959,12 +959,58 @@ function updateUI() {
 transferPlayerSearchInput.addEventListener("input", updateUI);
 sortTransferPlayer.addEventListener("change", updateUI);
 
-// transferPlayersCardsDiv.addEventListener("click", (e) => {
-//   const transferPlayersCardDiv = e.target.closest(".player-transfer-card");
-//   const transferCardId = Number(transferPlayersCardDiv.dataset.id);
-//   const transferCard = mockTransfers.find((t) => t.id === transferCardId);
-//   overlay.style.display = "block";
-//   transferCardsModal.style.display = "block";
-//   transferCardsModal.classList.add("modal-box-open");
-//   body.classList.add("no-scroll");
-// });
+transferPlayersCardsDiv.addEventListener("click", (e) => {
+  const transferPlayersCardDiv = e.target.closest(".player-transfer-card");
+  const transferCardId = Number(transferPlayersCardDiv.dataset.id);
+  const transferCard = mockTransfers.find((t) => t.id === transferCardId);
+  overlay.style.display = "block";
+  transferCardsModal.style.display = "block";
+  transferCardsModal.classList.add("modal-box-open");
+  body.classList.add("no-scroll");
+
+  transferCardsModal.innerHTML = `
+      <div class="transfer-cards-modal-header">
+        <span>Player About</span>
+        <img
+          class="close-modal"
+          src="https://img.icons8.com/?size=100&id=8112&format=png&color=000000"
+          alt=""
+        />
+      </div>
+      <div class="transfer-cards-modal-top">
+        <img class="transfer-modal-player-img" src="${transferCard.assets.playerImageLocal}" alt="" />
+        <div class="transfer-cards-modal-about">
+          <div class="transfer-modal-player-name">${transferCard.player.name}</div>
+          <div class="transfer-modal-player-nat">
+            <img src="${transferCard.player.flag}" alt="" />
+            <span>${transferCard.player.nationality}</span>
+          </div>
+          <span class="transfer-modal-player-position">Pos : ${transferCard.player.position}</span>
+          <span class="transfer-modal-player-age">Age : ${transferCard.player.age}</span>
+        </div>
+      </div>
+      <div class="transfer-about">
+        <span
+          >He moved from <b>${transferCard.move.fromTeam}</b> to <b>${transferCard.move.toTeam}</b> in
+          <b>${transferCard.move.transferDate}</b>
+        </span>
+        <span>Contract until : <b>${transferCard.move.contractUntil}</b></span>
+        <span>For a fee of <b>${transferCard.move.fee}M EUR</b></span>
+      </div>
+      <div class="transfer-player-bio">
+        <span class="bio">${transferCard.player.bio} He was born in <b>${transferCard.player.dob}</b>. His nationality is <b>${transferCard.player.nationality}</b></span>
+      </div>
+  `;
+
+  const closeTransferModal = document.querySelector(".close-modal");
+  overlay.addEventListener("click", () => {
+    overlay.style.display = "none";
+    transferCardsModal.style.display = "none";
+    body.classList.remove("no-scroll");
+  });
+  closeTransferModal.addEventListener("click", () => {
+    overlay.style.display = "none";
+    transferCardsModal.style.display = "none";
+    body.classList.remove("no-scroll");
+  });
+});

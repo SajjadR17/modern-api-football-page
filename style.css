@@ -254,7 +254,13 @@ body {
   -webkit-overflow-scrolling: touch;
   transition: all 0.5s ease;
   opacity: 0;
-  width: 400px;
+  width: 35%;
+}
+
+.transfer-player-bio {
+  font-weight: 300;
+  font-size: 14px;
+  padding: 10px;
 }
 
 .venue-name img {
@@ -1005,6 +1011,10 @@ option {
 
   .matches-cards-today {
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .transfer-cards-modal {
+    width: 80%;
   }
 }
 
