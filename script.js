@@ -244,6 +244,9 @@ matchesCardsTodayDiv.addEventListener("click", (e) => {
   if (!card) return;
   const matchId = Number(card.dataset.id);
   const match = mockTodayMatches.find((m) => m.fixture.id === matchId);
+  window.innerWidth - document.documentElement.clientWidth;
+  body.style.overflow = "";
+  body.style.paddingRight = `${scrollBarWidth}px`;
   overlay.style.display = "block";
   modalBox.classList.add("modal-box-open");
   body.classList.add("no-scroll");
@@ -469,11 +472,15 @@ matchesCardsTodayDiv.addEventListener("click", (e) => {
     overlay.style.display = "none";
     modalBox.classList.remove("modal-box-open");
     body.classList.remove("no-scroll");
+    body.style.overflow = "";
+    body.style.paddingRight = "";
   });
   overlay.addEventListener("click", () => {
     overlay.style.display = "none";
     modalBox.classList.remove("modal-box-open");
     body.classList.remove("no-scroll");
+    body.style.overflow = "";
+    body.style.paddingRight = "";
   });
 
   const modalMatchTime = document.querySelector(".modal-match-time");
@@ -599,6 +606,10 @@ matchesCardsLiveDiv.addEventListener("click", (e) => {
   if (!card) return;
   const matchId = Number(card.dataset.id);
   const match = mockLiveMatches.find((m) => m.fixture.id === matchId);
+  const scrollBarWidth =
+    window.innerWidth - document.documentElement.clientWidth;
+  body.style.overflow = "";
+  body.style.paddingRight = `${scrollBarWidth}px`;
   overlay.style.display = "block";
   modalBox.classList.add("modal-box-open");
   body.classList.add("no-scroll");
@@ -822,11 +833,15 @@ matchesCardsLiveDiv.addEventListener("click", (e) => {
     overlay.style.display = "none";
     modalBox.classList.remove("modal-box-open");
     body.classList.remove("no-scroll");
+    body.style.overflow = "";
+    body.style.paddingRight = "";
   });
   overlay.addEventListener("click", () => {
     overlay.style.display = "none";
     modalBox.classList.remove("modal-box-open");
     body.classList.remove("no-scroll");
+    body.style.overflow = "";
+    body.style.paddingRight = "";
   });
 
   const modalMatchTime = document.querySelector(".modal-match-time");
@@ -963,11 +978,13 @@ transferPlayersCardsDiv.addEventListener("click", (e) => {
   const transferPlayersCardDiv = e.target.closest(".player-transfer-card");
   const transferCardId = Number(transferPlayersCardDiv.dataset.id);
   const transferCard = mockTransfers.find((t) => t.id === transferCardId);
+  const scrollBarWidth =
+    window.innerWidth - document.documentElement.clientWidth;
+  body.style.overflow = "";
+  body.style.paddingRight = `${scrollBarWidth}px`;
   overlay.style.display = "block";
-  transferCardsModal.style.display = "block";
   transferCardsModal.classList.add("modal-box-open");
   body.classList.add("no-scroll");
-
   transferCardsModal.innerHTML = `
       <div class="transfer-cards-modal-header">
         <span>Player About</span>
@@ -1005,12 +1022,16 @@ transferPlayersCardsDiv.addEventListener("click", (e) => {
   const closeTransferModal = document.querySelector(".close-modal");
   overlay.addEventListener("click", () => {
     overlay.style.display = "none";
-    transferCardsModal.style.display = "none";
+    transferCardsModal.classList.remove("modal-box-open");
     body.classList.remove("no-scroll");
+    body.style.overflow = "";
+    body.style.paddingRight = "";
   });
   closeTransferModal.addEventListener("click", () => {
     overlay.style.display = "none";
-    transferCardsModal.style.display = "none";
+    transferCardsModal.classList.remove("modal-box-open");
     body.classList.remove("no-scroll");
+    body.style.overflow = "";
+    body.style.paddingRight = "";
   });
 });
