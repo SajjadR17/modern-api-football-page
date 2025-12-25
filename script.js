@@ -244,7 +244,8 @@ matchesCardsTodayDiv.addEventListener("click", (e) => {
   if (!card) return;
   const matchId = Number(card.dataset.id);
   const match = mockTodayMatches.find((m) => m.fixture.id === matchId);
-  window.innerWidth - document.documentElement.clientWidth;
+  const scrollBarWidth =
+    window.innerWidth - document.documentElement.clientWidth;
   body.style.overflow = "";
   body.style.paddingRight = `${scrollBarWidth}px`;
   overlay.style.display = "block";
