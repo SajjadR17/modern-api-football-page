@@ -10,10 +10,16 @@ const leaguesTableDiv = document.querySelector(".leagues-table");
 const selectTable = document.querySelector("#select-table");
 const leagueTableName = document.querySelector(".league-table-name");
 const overlay = document.querySelector(".overlay");
+const topGoalsDiv = document.querySelector(".topGoals");
+const topGoalsBtn = document.querySelector(".top-goals-btn");
+const topGoals = document.querySelector(".topGoals");
+const searchGoalsInput = document.querySelector(".search-goals");
 const body = document.body;
+const goals = document.querySelector(".goals");
 const transferCardsModal = document.querySelector(".transfer-cards-modal");
 const sortTransferPlayer = document.querySelector("#sort-transfer-player");
 const modalBox = document.querySelector(".modal-box");
+const goalCardsModal = document.querySelector(".goal-cards-modal");
 const playerTransfersDiv = document.querySelector(".player-transfers");
 const TransfersBtn = document.querySelector(".Transfers-btn");
 const transferPlayerSearchInput = document.querySelector(
@@ -24,6 +30,7 @@ const transferPlayersCardsDiv = document.querySelector(
 );
 import { mockLiveMatches } from "./data/mock-live.js";
 import { mockTransfers } from "./data/mock-transfers.js";
+import { selectedGoals2025 } from "./data/mockTopGoals.js";
 const liveMatches = mockLiveMatches;
 import {
   mockPremierLeagueStandings,
@@ -44,6 +51,7 @@ setInterval(() => {
     matchesCardsTodayDiv.innerHTML = `<span class="error-loading-span">You Are Offline , Check Your Network</span>`;
     leaguesTableDiv.innerHTML = `<span class="error-loading-span-league">You Are Offline , Check Your Network</span>`;
     playerTransfersDiv.innerHTML = `<span class="error-loading-span-league">You Are Offline , Check Your Network</span>`;
+    topGoals.innerHTML = `<span class="error-loading-span-league">You Are Offline , Check Your Network</span>`;
   }
 });
 
@@ -52,6 +60,7 @@ liveBtn.addEventListener("click", () => {
   matchesCardsTodayDiv.style.display = "none";
   leaguesTableDiv.style.display = "none";
   playerTransfersDiv.style.display = "none";
+  topGoalsDiv.style.display = "none";
   switchBtns.forEach((switchBtn) => {
     switchBtn.classList.remove("active");
   });
@@ -64,6 +73,7 @@ window.addEventListener("load", () => {
   matchesCardsTodayDiv.style.display = "none";
   leaguesTableDiv.style.display = "none";
   playerTransfersDiv.style.display = "none";
+  topGoalsDiv.style.display = "none";
   switchBtns.forEach((switchBtn) => {
     switchBtn.classList.remove("active");
   });
@@ -76,6 +86,7 @@ todayBtn.addEventListener("click", () => {
   matchesCardsTodayDiv.style.display = "grid";
   leaguesTableDiv.style.display = "none";
   playerTransfersDiv.style.display = "none";
+  topGoalsDiv.style.display = "none";
   switchBtns.forEach((switchBtn) => {
     switchBtn.classList.remove("active");
   });
@@ -88,6 +99,7 @@ TransfersBtn.addEventListener("click", () => {
   matchesCardsTodayDiv.style.display = "none";
   leaguesTableDiv.style.display = "none";
   playerTransfersDiv.style.display = "block";
+  topGoalsDiv.style.display = "none";
   switchBtns.forEach((switchBtn) => {
     switchBtn.classList.remove("active");
   });
@@ -100,11 +112,25 @@ leaguesBtn.addEventListener("click", () => {
   matchesCardsTodayDiv.style.display = "none";
   leaguesTableDiv.style.display = "block";
   playerTransfersDiv.style.display = "none";
+  topGoalsDiv.style.display = "none";
   switchBtns.forEach((switchBtn) => {
     switchBtn.classList.remove("active");
   });
   leaguesBtn.classList.add("active");
   btnTitle.textContent = "Leagues Tabels - Standing";
+});
+
+topGoalsBtn.addEventListener("click", () => {
+  matchesCardsLiveDiv.style.display = "none";
+  matchesCardsTodayDiv.style.display = "none";
+  leaguesTableDiv.style.display = "none";
+  playerTransfersDiv.style.display = "none";
+  topGoalsDiv.style.display = "block";
+  switchBtns.forEach((switchBtn) => {
+    switchBtn.classList.remove("active");
+  });
+  topGoalsBtn.classList.add("active");
+  btnTitle.textContent = "Top Goals 2025";
 });
 
 async function fetchLiveMatches() {
@@ -844,14 +870,6 @@ matchesCardsLiveDiv.addEventListener("click", (e) => {
     body.style.overflow = "";
     body.style.paddingRight = "";
   });
-
-  const modalMatchTime = document.querySelector(".modal-match-time");
-  const modalMatchStatus = document.querySelector(".modal-match-status");
-
-  modalMatchStatus.style.border = "1px solid red";
-  modalMatchStatus.style.color = "red";
-  modalMatchTime.style.border = "1px solid green";
-  modalMatchTime.style.color = "green";
 });
 
 async function getTransfers() {
@@ -920,7 +938,6 @@ fetchTransfers();
 
 function sortAndSearch(allTransfers, searchValue, selectValue) {
   let result = [...allTransfers];
-  console.log(result);
 
   result = result.filter((transfer) => {
     return transfer.player.name
@@ -1035,4 +1052,101 @@ transferPlayersCardsDiv.addEventListener("click", (e) => {
     body.style.overflow = "";
     body.style.paddingRight = "";
   });
+});
+
+async function getTopGoals() {
+  return selectedGoals2025;
+}
+
+function renderTopGoals(topGoals) {
+  goals.innerHTML = "";
+  topGoals.forEach((topGoal) => {
+    const goalDiv = document.createElement("div");
+    goalDiv.classList.add("goal");
+    goalDiv.dataset.id = topGoal.id;
+    goalDiv.innerHTML = `
+          <img src="${topGoal.playerImg}" alt="" class="top-goal-scorer-img">
+          <div class="top-goal-scorer-about">
+              <span class="top-goal-scorer-name">${topGoal.player} - '${topGoal.minute}</span>
+              <span class="top-goal-scorer-team">${topGoal.team} VS ${topGoal.opponent}</span>
+              <span class="top-goal-scorer-league">${topGoal.competition} - ${topGoal.season}</span>
+              <span class="goal-review">Tap to view the goal</span>
+          </div>
+  `;
+
+    goals.appendChild(goalDiv);
+  });
+}
+
+topGoalsBtn.addEventListener("click", async () => {
+  const fetchTopGoals = await getTopGoals();
+  renderTopGoals(fetchTopGoals);
+});
+
+goals.addEventListener("click", (e) => {
+  const topGoalDiv = e.target.closest(".goal");
+  const topGoalDivId = Number(topGoalDiv.dataset.id);
+  const topGoalDivData = selectedGoals2025.find(
+    (selectedGoal) => selectedGoal.id === topGoalDivId
+  );
+  overlay.style.display = "block";
+  body.classList.add("no-scroll");
+  goalCardsModal.classList.add("modal-box-open");
+  goalCardsModal.innerHTML = `
+      <div class="goal-modal-header">
+        <span class="modal-goal-scorer">${topGoalDivData.player}</span>
+        <img class="close-modal"
+          src="https://img.icons8.com/?size=100&id=8112&format=png&color=000000"
+          alt=""
+        />
+      </div>
+      <div class="goal-video-review">
+        <video src="${topGoalDivData.videoLink}" class="goal-video" loop muted autoplay></video>
+        <img src="https://img.icons8.com/?size=100&id=9414&format=png&color=000000" alt="" class="goal-video-sound-btn">
+      </div>
+  `;
+
+  const goalVideoSoundBtn = document.querySelector(".goal-video-sound-btn");
+  const goalVideo = document.querySelector(".goal-video");
+  goalVideoSoundBtn.addEventListener("click", () => {
+    if (goalVideo.muted) {
+      goalVideo.muted = false;
+      goalVideoSoundBtn.setAttribute(
+        "src",
+        "https://img.icons8.com/?size=100&id=9983&format=png&color=000000"
+      );
+    } else {
+      goalVideo.muted = true;
+      goalVideoSoundBtn.setAttribute(
+        "src",
+        "https://img.icons8.com/?size=100&id=9414&format=png&color=000000"
+      );
+    }
+  });
+
+  const closeModal = document.querySelector(".close-modal");
+  closeModal.addEventListener("click", () => {
+    goalCardsModal.classList.remove("modal-box-open");
+    overlay.style.display = "none";
+    body.classList.remove("no-scroll");
+    goalVideo.muted = true;
+  });
+  overlay.addEventListener("click", () => {
+    goalCardsModal.classList.remove("modal-box-open");
+    overlay.style.display = "none";
+    body.classList.remove("no-scroll");
+    goalVideo.muted = true;
+  });
+});
+
+searchGoalsInput.addEventListener("input", () => {
+  let filteredGoals = selectedGoals2025.filter((topGoal) => {
+    return topGoal.player
+      .toLowerCase()
+      .includes(searchGoalsInput.value.toLowerCase());
+  });
+  renderTopGoals(filteredGoals);
+  if (filteredGoals.length === 0) {
+    goals.innerHTML = `<span class="error-loading-span">Player not found !!</span>`;
+  }
 });

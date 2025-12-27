@@ -28,6 +28,7 @@
         <button class="switch-btn today-btn">Today</button>
         <button class="switch-btn leagues-btn">Standings</button>
         <button class="switch-btn Transfers-btn">Transfers</button>
+        <button class="switch-btn top-goals-btn">Top Goals</button>
       </div>
       <span class="btn-title">Football Live Scores</span>
     </div>
@@ -61,7 +62,9 @@
             <div><span>PTS</span></div>
           </div>
         </div>
-        <div class="ranking"></div>
+        <div class="ranking">
+          <span class="error-loading-span">Loading...</span>
+        </div>
       </div>
     </div>
     <div class="player-transfers">
@@ -78,13 +81,26 @@
           <option value="lowest">Lowest Fee</option>
         </select>
       </div>
-      <div class="transfer-players-cards"></div>
+      <div class="transfer-players-cards">
+        <span class="error-loading-span">Loading...</span>
+      </div>
+    </div>
+    <div class="topGoals">
+      <div class="goals-controls">
+        <input type="text" class="search-goals" placeholder="Enter Player Name"/>
+      </div>
+      <span>
+      <div class="goals">
+        <span class="error-loading-span">Loading...</span>
+      </div>
     </div>
     <div class="transfer-cards-modal"></div>
+    <div class="goal-cards-modal"></div>
     <script src="script.js" type="Module"></script>
     <script src="data/mock-live.js" type="Module"></script>
     <script src="data/mock-standings.js" type="Module"></script>
     <script src="data/mock-today.js" type="Module"></script>
     <script src="data/mock-transfers.js" type="Module"></script>
+    <script src="data/mockTopGoals.js" type="Module"></script>
   </body>
 </html>
