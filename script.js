@@ -1,25 +1,22 @@
+const body = document.body;
+const menuBtn = document.querySelector(".menu-btn");
+const switchBtnsDiv = document.querySelector(".switch-btns");
+const switchBtns = document.querySelectorAll(".switch-btn");
+const liveBtn = document.querySelector(".live-btn");
+const todayBtn = document.querySelector(".today-btn");
+const leaguesBtn = document.querySelector(".leagues-btn");
+const favoriteTeamsBtn = document.querySelector(".favorite-teams-btn");
+const btnTitle = document.querySelector(".btn-title");
 const matchesCardsLiveDiv = document.querySelector(".matches-cards-live");
 const matchesCardsTodayDiv = document.querySelector(".matches-cards-today");
+const overlay = document.querySelector(".overlay");
+const modalBox = document.querySelector(".modal-box");
 const rankingDiv = document.querySelector(".ranking");
-const switchBtns = document.querySelectorAll(".switch-btn");
-const todayBtn = document.querySelector(".today-btn");
-const liveBtn = document.querySelector(".live-btn");
-const leaguesBtn = document.querySelector(".leagues-btn");
-const btnTitle = document.querySelector(".btn-title");
 const leaguesTableDiv = document.querySelector(".leagues-table");
 const selectTable = document.querySelector("#select-table");
 const leagueTableName = document.querySelector(".league-table-name");
-const overlay = document.querySelector(".overlay");
-const topGoalsDiv = document.querySelector(".topGoals");
-const topGoalsBtn = document.querySelector(".top-goals-btn");
-const topGoals = document.querySelector(".topGoals");
-const searchGoalsInput = document.querySelector(".search-goals");
-const body = document.body;
-const goals = document.querySelector(".goals");
 const transferCardsModal = document.querySelector(".transfer-cards-modal");
 const sortTransferPlayer = document.querySelector("#sort-transfer-player");
-const modalBox = document.querySelector(".modal-box");
-const goalCardsModal = document.querySelector(".goal-cards-modal");
 const playerTransfersDiv = document.querySelector(".player-transfers");
 const TransfersBtn = document.querySelector(".Transfers-btn");
 const transferPlayerSearchInput = document.querySelector(
@@ -28,6 +25,12 @@ const transferPlayerSearchInput = document.querySelector(
 const transferPlayersCardsDiv = document.querySelector(
   ".transfer-players-cards"
 );
+const topGoalsDiv = document.querySelector(".topGoals");
+const topGoalsBtn = document.querySelector(".top-goals-btn");
+const topGoals = document.querySelector(".topGoals");
+const searchGoalsInput = document.querySelector(".search-goals");
+const goals = document.querySelector(".goals");
+const goalCardsModal = document.querySelector(".goal-cards-modal");
 import { mockLiveMatches } from "./data/mock-live.js";
 import { mockTransfers } from "./data/mock-transfers.js";
 import { selectedGoals2025 } from "./data/mockTopGoals.js";
@@ -42,7 +45,7 @@ import {
 } from "./data/mock-standings.js";
 import { mockTodayMatches } from "./data/mock-today.js";
 const USE_MOCK = true;
-const API_KEY = "";
+const API_KEY = "32aea764fddc7501699dd579da53a25e";
 const BASE_URL = "https://v3.football.api-sports.io";
 
 setInterval(() => {
@@ -53,6 +56,10 @@ setInterval(() => {
     playerTransfersDiv.innerHTML = `<span class="error-loading-span-league">You Are Offline , Check Your Network</span>`;
     topGoals.innerHTML = `<span class="error-loading-span-league">You Are Offline , Check Your Network</span>`;
   }
+});
+
+menuBtn.addEventListener("click", () => {
+  switchBtnsDiv.classList.toggle("switch-btns-open");
 });
 
 liveBtn.addEventListener("click", () => {
@@ -135,15 +142,12 @@ topGoalsBtn.addEventListener("click", () => {
 
 async function fetchLiveMatches() {
   try {
-    const res = await fetch(
-      `${BASE_URL}/fixtures?live=all&league=40-100-100-100-100`,
-      {
-        method: "GET",
-        headers: {
-          "x-apisports-key": API_KEY,
-        },
-      }
-    );
+    const res = await fetch(`${BASE_URL}/fixtures?live=all`, {
+      method: "GET",
+      headers: {
+        "x-apisports-key": API_KEY,
+      },
+    });
 
     if (!res.ok) {
       matchesCardsLiveDiv.innerHTML = `<span class="error-loading-span">Network Error !!</span>`;
@@ -542,6 +546,9 @@ function renderStandings(ranks) {
     teamRankDiv.classList.add("rank");
     if (teamRank > teamRanks - 3) {
       teamRankDiv.classList.add("redStandings");
+    }
+    if (teamRank < teamRanks - (teamRanks - 5)) {
+      teamRankDiv.classList.add("BlueStandings");
     }
     teamRankDiv.innerHTML = `
             <div class="table-left">
@@ -994,6 +1001,7 @@ sortTransferPlayer.addEventListener("change", updateUI);
 
 transferPlayersCardsDiv.addEventListener("click", (e) => {
   const transferPlayersCardDiv = e.target.closest(".player-transfer-card");
+  if (!transferPlayersCardDiv) return;
   const transferCardId = Number(transferPlayersCardDiv.dataset.id);
   const transferCard = mockTransfers.find((t) => t.id === transferCardId);
   const scrollBarWidth =
@@ -1085,6 +1093,7 @@ topGoalsBtn.addEventListener("click", async () => {
 
 goals.addEventListener("click", (e) => {
   const topGoalDiv = e.target.closest(".goal");
+  if (!topGoalDiv) return;
   const topGoalDivId = Number(topGoalDiv.dataset.id);
   const topGoalDivData = selectedGoals2025.find(
     (selectedGoal) => selectedGoal.id === topGoalDivId

@@ -178,6 +178,17 @@ body {
   border-bottom: 2px solid #444;
 }
 
+.menu-btn {
+  border: 1px solid #cccccc;
+  background-color: #fff;
+  padding: 5px 10px;
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 20px;
+  display: none;
+  cursor: pointer;
+}
+
 .switch-btns button {
   border: 1px solid #cccccc;
   background-color: #fff;
@@ -686,11 +697,11 @@ select {
 }
 
 .redStandings {
-  color: red;
+  border-left: 2px solid red;
 }
 
-.GreenStandings {
-  color: green;
+.BlueStandings {
+  border-left: 2px solid rgb(0, 158, 250);
 }
 
 select:focus {
@@ -1100,6 +1111,47 @@ option {
   border-radius: 50%;
 }
 
+.teams {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.team {
+  display: flex;
+  
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid #636363;
+  border-radius: 8px;
+  font-weight: 300;
+  width: 110px;
+  height: 100px;
+  gap: 10px;
+  font-size: 12px;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.favorite-team-logo {
+  width: 40px;
+  height: 40px;
+}
+
+.favorite-team-checkbox {
+  position: absolute;
+  cursor: pointer;
+  top: 5px;
+  right: 5px;
+  width: 15px;
+}
+
 @media (max-width: 1000px) {
   .goals {
     grid-template-columns: repeat(3, 1fr);
@@ -1107,6 +1159,42 @@ option {
 
   .transfer-players-cards {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 850px) {
+  .football-cards-header {
+    flex-direction: column;
+  }
+
+  .switch-btns {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .switch-btns-open {
+    height: 250px;
+    border-top: 2px solid #636363;
+    padding-top: 20px;
+    opacity: 1;
+  }
+
+  .switch-btns button {
+    margin: 5px auto;
+    height: 30px;
+    width: 100%;
+  }
+
+  .btn-title {
+    display: none;
+  }
+
+  .menu-btn {
+    display: block;
   }
 }
 
@@ -1127,10 +1215,6 @@ option {
   .match-card img {
     width: 30px;
     height: 30px;
-  }
-
-  .btn-title {
-    display: none;
   }
 
   .match-scores {
@@ -1172,18 +1256,6 @@ option {
 
   .goals {
     grid-template-columns: repeat(1, 1fr);
-  }
-
-  .switch-btns {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .switch-btns button {
-    margin: 5px auto;
-    height: 30px;
-    width: 100%;
   }
 
   .modal-box {
